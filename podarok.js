@@ -1,11 +1,19 @@
 (function () {
-  var target = "https://fox-harko.pp.ua/" + window.location.hash;
+  var newDomain = "fox-harko.pp.ua";
 
-  window.addEventListener("load", function () {
-    window.location.replace(target);
-  });
+  // Якщо вже на новому домені, нічого не робимо
+  if (window.location.hostname === newDomain) {
+    return;
+  }
 
-  setTimeout(function () {
-    window.location.href = target;
-  }, 1);
+  // Зберігаємо шлях сторінки, параметри і hash
+  var target =
+    "https://" +
+    newDomain +
+    window.location.pathname +
+    window.location.search +
+    window.location.hash;
+
+  // Перенаправлення без збереження старої сторінки в історії
+  window.location.replace(target);
 })();
